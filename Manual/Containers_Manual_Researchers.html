@@ -252,6 +252,28 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+}
+.hanging div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}
+</style>
 
 
 
@@ -352,59 +374,108 @@ display: none;
 <h1 class="title toc-ignore">Banco de Portugal’s Microdata Research
 Laboratory: Using Containers</h1>
 <h4 class="author"><a href="https://bplim.bportugal.pt/">BPLIM</a></h4>
-<h4 class="date">today</h4>
+<h4 class="date">March 2023</h4>
 
 </div>
 
 
-<!--
----
-title: "My Document"
-author: "John Doe"
-date: "2023-03-06"
----
-
-    theme: cosmo
-
-    #theme: [cosmo, theme.scss]
-    #css: styles.css
-    css: portela.css
-
-format:
-  html:
-    css: styles.css
-
-    includes:
-      in_header: extLogo.html
--->
-<div id="preamble" class="section level1">
-<h1>Preamble</h1>
-<p>The following discussion on how to build a container is designed for
-Linux in Pitágoras. With small adaptations, it should work in other
-environments.</p>
-<p>You can build Singularity containers in Windows. However, building a
-container on Windows requires a Linux virtual machine or a Windows
-Subsystem for Linux (WSL) environment. Once you have a Linux environment
-set up, you can use the Singularity command line tools to build a
-container.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p>According to <span class="citation">(<strong>CBHP2?</strong>)</span>,
-the use of machine learning algorithms can improve the accuracy of
-predictive models.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>This guide provides instructions on how to use containers in BPLIM’s
+infrastructure. Follow these steps to request a container for your
+project:</p>
+<ol style="list-style-type: decimal">
+<li><p>Determine your requirements: Before requesting a container,
+identify your specific needs for statistical tools, packages, and any
+other necessary software.</p></li>
+<li><p>Contact BPLIM’s team: After identifying your container
+requirements, reach out to BPLIM’s team by sending an email to
+<code>bplim@bportugal.pt</code> with the details from Step 1.</p></li>
+<li><p>Await a response: After submitting your request, you will receive
+a response from BPLIM’s team. The team will review your requirements and
+provide you with a container that meets your specifications.</p></li>
+<li><p>Configure the container: Once the container is ready, BPLIM’s
+team will configure it for you and provide you with the necessary
+details to access and utilize the container.</p></li>
+<li><p>Review the container: Upon receiving the container, carefully
+review it to ensure that it meets your requirements. Contact BPLIM if
+you have any questions or concerns that need clarification.</p></li>
+</ol>
+<div id="access-to-the-container" class="section level1">
+<h1>Access to the container</h1>
+<div id="alternative-a-use-a-pre-defined-setup" class="section level3">
+<h3>Alternative A: use a pre-defined setup</h3>
+<p>Once you have logged in to the server, you will see an icon that
+opens the container for your project. To launch the container and start
+the predefined application that you specified in your request, simply
+double-click on the icon. Once you have completed this step, it will
+function similarly to any other application.</p>
 </div>
-<div id="starting-point-the-container" class="section level1">
-<h1>Starting point: the container</h1>
-<p>A singularity container is a way to package and distribute software
+<div id="alternative-b-use-the-command-line" class="section level3">
+<h3>Alternative B: use the command line</h3>
+<p>This solution makes use of the <code>Terminal</code>, giving you more
+freedom to interact with the container. Follow the steps below:</p>
+<ol style="list-style-type: decimal">
+<li><p>Open a Terminal in your project’s work_area (e.g.,
+<code>/bplimext/projects/PROJECT_ID/work_area</code>).</p></li>
+<li><p>The container is located in your project’s tools folder
+(<code>/bplimext/projects/PROJECT_ID/tools</code>).</p></li>
+<li><p>Run the container using the following command:</p></li>
+</ol>
+<p><code>singularity shell ../tools/iPROJECT_ID.BPLIM_Python_R_Jupyter.sif</code></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Inside the container, the prompt will change to
+<code>Singularity &gt;</code></li>
+</ol>
+<blockquote>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJEAAAAZCAYAAAAxO8yWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVXSURBVGhD7ZlbKG1bGMct1nLPpiPXiNih6KRcHlxy7FzDiwe5RFJSUooHjnvn4TycBxSl80I87LaiiEJ5IBJR7iHkQZL7JdeN7/hGDY051lhrOcdhWav51a/m/L7/nGuuMf9zzG+sZXJ2dgaIiYkJIaJcBY5+pi/7hoq1owJi/1AJa8aIwtQE4v9Sga2LQlj/P9DoDd5Ehkp4iZJ8QaXFs4F+UUBYsRK+JpoJtUaHwgS8fzOD6N/19NAYi4lcfjWFmFoVpLSakxkIDYRPp0hrbKT9bQ5xf6rA3uv9ZiGtGIuJZPSIbCKZNyObSObNyCaSeTMiE+Xm5sLMzAzJI319ffDt2zeJhoIhyn8UfIg078VHf96nhTdRXV0dTE5OQlhYGFhZWYGfnx90dnZqHDBNeX3w0dei6/N01Y0G3kSHh4fg6ekpFT1TWVmplvtsfLab9tmu593gTXR6egru7u5SkQA2NNWjo6NhfHwcrq6uiDl//PgBTk5OEl1OTg6sra3B3d0dbG5uQnZ2NjmWPQ+r15YX5VhSU1PJLIufhdfT3t4ODg4OajoMvM7v37+T8UBtaWmppE6DPU5UZ4PVzM3NQUJCgiQXEREBKysrL/sLCwtQVlYGLi4uEt2ngzdRS0sLTE9PQ3JyMlhbW0vFAvjBYfM4UGgkGxsbYsyuri5yY6gmPj6eGIdqwsPDYXV1lRzLnodus4jyohzL6Ogo6e3wNe3o6AhNTU3E2LwOY2BgADIzM4nJ8Ca2trYKdXyORVu9sLAQent7Jbnm5mbSTtB9NC7ei4eHBxgaGoKsrKxX3ZMPhzeRmZkZlJSUwOzsLNze3sLS0hL5Mqam4v/TNA0UBvZVbM7Z2RkODg5e9sfGxiApKUmiQWNh0H12m0WUF+W0YWdnB+fn52p5jPz8fLU8D4YoT9FWt7W1hZOTE3B1dSX7CoUCdnd3ISAgQE3r4+MDVVVVsLy8DBcXF2QGjY2NVdPpDd5ELEqlkswSExMT0NjYKNRoGigMlUr9vxwMun18fAz29vaS+pcvXyQadptFlBflKDij4JO+tbUFNzc3RIvx9PSkpsWgN1cbGKI8RVe9ra0NqquryXZkZCR5YHkND85G+IrVde4PRZuJKPgqYmcQFk1f5jV5kYlwn9Ww2xQ0pygvylH6+/vJE4xPuqWlJcnhbCA6RpQToUunqx4cHAw7OztklkeD19TUCHW+vr7EbNgvXV5eQkdHh8afXPQCb6L6+nqp4Bk00f7+vloe0TRQr8mLXmfYbLKao6MjtWYceydWQ7m+vn4xCA++BnjDpqWlCc8jyonQpfv58yeZzUU1Cv4el5KSQl5l+HMKWysvLydtBfZEw8PDZNFhED0RRnd3NwQFBYGFhQUEBgbCyMgIeVIkBzL6/5pPTEyUNNbYQy0uLko0eC3YkLu5uZEBjIqKIgPLaihTU1NQVFRE+jq+hoZtaGggRkLS09PJq010HlFOhC7dxsYGZGRkCK+HUlBQANvb2+R78zVcnaGRXvNq1Su8ieLi4sjKBHO4NMfVEjZ15ubmLxptwWroNgufz8vLI4N9f39PDIWDjtu0jisjNBLOSDjTYH+GpuPPg4SEhJDrxT6Hr3t4eEBPTw9pZul5sA/hdYgoR9EWvBZnOjTI4+OjsI7gw4PNfW1trbBuEPAm0jfe3t6wvr4urBkjOEvt7e2Bv7+/sG4Q6NtEg4ODEBMTQ5pcLy8v0gBXVFQItcYGLuuLi4tJXySqGwz6NhH+ijw/P0+W3TgDoYF0NaPGAgauzkJDQ4V1g0HfJpIxAmQTybwZaiJkdXFeRuZfI5tI5o3Mwz/t/le/aEXmdwAAAABJRU5ErkJggg==" /></p>
+</blockquote>
+<ol start="5" style="list-style-type: decimal">
+<li>For example, to open a Jupyter Notebook, type:</li>
+</ol>
+<p><code>jupyter notebook</code></p>
+<p>If you want to use Stata or RStudio, type <code>xstata-mp</code> or
+<code>rstudio</code>, respectively.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>When you’re finished using the container, type exit to leave the
+Singularity image.</li>
+</ol>
+</div>
+</div>
+<div id="build-and-replicate-the-container-of-your-project" class="section level1">
+<h1>Build and replicate the container of your project</h1>
+<p>In this section, we will discuss how to replicate your project’s
+container locally. To do this, you’ll need a running instance of
+Singularity and the script used to build the container for your project
+(which can be requested from BPLIM). If you have these, just open a
+<code>Terminal</code> on your computer and type:</p>
+<p><code>singularity build --fake-root iPROJECT_ID.BPLIM_Python_R_Jupyter.sif PROJECT_ID.BPLIM_Python_R_Jupyter.def</code></p>
+<p>You also have the option to write your own script for your project’s
+container, which we can then build and make available in your
+<code>tools</code> folder.</p>
+<p>The steps to build a Singularity container discussed below are
+designed for Linux, but with minor adjustments, they can also be applied
+in other environments.</p>
+<p>Note that although it is possible to build Singularity containers on
+Windows, it requires a Linux virtual machine or a Windows Subsystem for
+Linux (WSL) environment. Once you have set up a Linux environment, you
+can use the Singularity command-line tools to build your container.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>In addition to this guide, please refer to BPLIM’s Guide for
+Researchers (<span class="citation">Banco de Portugal (2022)</span>) for
+more information.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<div id="starting-point-the-container" class="section level2">
+<h2>Starting point: the container</h2>
+<p>A Singularity container is a way to package and distribute software
 and its dependencies in a portable and isolated environment. To build a
-singularity container, you will need to have Singularity installed on
-your system.</p>
+Singularity container, you’ll need to have Singularity installed on your
+system.</p>
 <p>Here are the basic steps to build a container:</p>
 <ol style="list-style-type: decimal">
-<li>Create a recipe/definition file: This is a text file that contains
-the instructions for building the container. The recipe file should
-specify the base image to use, any additional software to install, and
-any environment variables to set.</li>
-<li>Build the container: Use the singularity <code>build</code> command
-to build the container from the recipe file. For example:</li>
+<li><p>Create a recipe/definition file: This is a text file that
+contains the instructions for building the container. The recipe file
+should specify the base image to use, any additional software to
+install, and any environment variables to set.</p></li>
+<li><p>Build the container: Use the singularity <code>build</code>
+command to build the container from the recipe file. For
+example:</p></li>
 </ol>
 <p><code>singularity build mycontainer.sif recipe.def</code></p>
 <ol start="3" style="list-style-type: decimal">
@@ -416,43 +487,45 @@ container and test that it runs correctly. For example:</li>
 <li>(optional) Publish your container to a public or private registry,
 like Singularity Hub or Singularity Container Library.</li>
 </ol>
-<p>Here is an example of a simple recipe file that creates a container
+<p>In the <a href="#appendix">Appendix</a> of this manual, you will find
+an example of a definition file for building a container with Stata. For
+detailed instructions and troubleshooting, you can refer to the official
+documentation at <a href="https://sylabs.io/guides/3.6/user-guide/index.html" class="uri">https://sylabs.io/guides/3.6/user-guide/index.html</a>.
+Additionally, here is a simple recipe file that creates a container
 based on the Ubuntu 20.04 base image and installs the nano text
 editor:</p>
-<pre><code>Bootstrap: library
-From: ubuntu:20.04
+<pre><code>    Bootstrap: library
+    From: ubuntu:20.04
 
-%post
-    apt-get update
-    apt-get install -y nano</code></pre>
-<p>In the <a href="#appendix">Appendix</a> to this manual you find a
-definition file to build a container with Stata.</p>
-<p>For detailed instructions and troubleshooting you can refer to the
-official documentation at <a href="https://sylabs.io/guides/3.6/user-guide/index.html" class="uri">https://sylabs.io/guides/3.6/user-guide/index.html</a>.</p>
+    %post
+        apt-get update
+        apt-get install -y nano</code></pre>
 </div>
-<div id="the-definition-file-step-by-step" class="section level1">
-<h1>The definition file step by step</h1>
+<div id="the-definition-file-step-by-step" class="section level2">
+<h2>The definition file step by step</h2>
 <p>In a Singularity definition file, you can write a variety of commands
 and instructions. Some common things you might include in the file
 are:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Package installation</strong>: You can use package
-managers like apt or yum to install software and dependencies that your
-container needs to run. For example, you might install a specific
-version of Python or a library that your application depends
-on.</p></li>
-<li><p><strong>Environment setup</strong>: You can use commands like ENV
-or export to set environment variables that your container needs to run.
-For example, you might set the PATH variable to include the location of
-a specific binary or library.</p></li>
-<li><p><strong>File copy</strong>: You can use commands like COPY or ADD
-to copy files from the host system into the container. For example, you
-might copy a script or a configuration file that your application needs
-to run.</p></li>
-<li><p><strong>Runscript</strong>: As previously stated, the Runscript
-is a script that is executed when the container is run. It typically
-contains commands to set up the environment and launch the application
-or process that the container is designed to run.</p></li>
+managers like <code>apt</code> or <code>yum</code> to install software
+and dependencies that your container needs to run. For example, you
+might install a specific version of Python or a library that your
+application depends on.</p></li>
+<li><p><strong>Environment setup</strong>: You can use commands like
+<code>ENV</code> or export to set environment variables that your
+container needs to run. For example, you might set the <code>PATH</code>
+variable to include the location of a specific binary or
+library.</p></li>
+<li><p><strong>File copy</strong>: You can use commands like
+<code>COPY</code> or <code>ADD</code> to copy files from the host system
+into the container. For example, you might copy a script or a
+configuration file that your application needs to run.</p></li>
+<li><p><strong>Runscript</strong>: As previously stated, the
+<code>Runscript</code> is a script that is executed when the container
+is run. It typically contains commands to set up the environment and
+launch the application or process that the container is designed to
+run.</p></li>
 <li><p><strong>Labels</strong>: You can include information about the
 container, such as the container’s name, version, and author.</p></li>
 <li><p><strong>Help</strong>: You can include a brief description of the
@@ -462,8 +535,8 @@ the container does.</p></li>
 <p>It’s worth noting that depending on the complexity of your container
 and the requirements of your application, you may need to include
 additional commands and instructions in your definition file.</p>
-<div id="header" class="section level2">
-<h2><code>header</code></h2>
+<div id="header" class="section level4">
+<h4><strong><code>header</code></strong></h4>
 <p>In a Singularity definition file, the “header” refers to the first
 section of the file that contains metadata and instructions for building
 the container. The header typically includes information such as the
@@ -473,34 +546,35 @@ run. The header also can include instructions for configuring the build
 environment, such as setting environment variables or installing
 dependencies. The header is usually written in a specific format
 (e.g. #!Singularity) and starts at the first line of the file.</p>
-<pre><code>#!Singularity
-Bootstrap: library
-From: ubuntu:20.04
+<pre><code>    #!Singularity
+    Bootstrap: library
+    From: ubuntu:20.04
 
-%help
-This container runs Stata.
+    %help
+    This container runs Stata.
 
-%labels
-AUTHOR BPLIM
-VERSION v1.0</code></pre>
-<p>This header uses the Bootstrap: library to indicate that the
-container should be built using the Singularity Library, and uses the
-From: ubuntu:20.04 to indicate that the container is based on the Ubuntu
-20.04 image. This header also includes a %help section that provides a
-brief description of the container, and a %labels section that includes
-information about the container’s author and version.</p>
+    %labels
+    AUTHOR BPLIM
+    VERSION v1.0</code></pre>
+<p>This header uses the <code>Bootstrap: library</code> to indicate that
+the container should be built using the Singularity Library, and uses
+the <code>From: ubuntu:20.04</code> to indicate that the container is
+based on the Ubuntu 20.04 image. This header also includes a
+<code>%help</code> section that provides a brief description of the
+container, and a <code>%labels</code> section that includes information
+about the container’s author and version.</p>
 <p>It’s worth noting that the way headers are written is not fixed and
 different instructions could be included.</p>
 </div>
-<div id="runscript" class="section level2">
-<h2><code>runscript</code></h2>
+<div id="runscript" class="section level4">
+<h4><strong><code>runscript</code></strong></h4>
 <p>The “runscript” in a Singularity definition file is a script that is
 executed when the container is run. It typically contains commands to
 set up the environment and launch the application or process that the
-container is designed to run. The runscript is executed by the
-Singularity runtime after the container is started, and it can be used
-to configure the container’s environment, set up the application, and
-launch the application or process.</p>
+container is designed to run. The <code>runscript</code> is executed by
+the Singularity runtime after the container is started, and it can be
+used to configure the container’s environment, set up the application,
+and launch the application or process.</p>
 <p>An example:</p>
 <pre><code>%runscript
     Rscript myscript.R</code></pre>
@@ -519,88 +593,97 @@ write something along the following lines:</p>
         exit 0
     fi</code></pre>
 </div>
-<div id="files" class="section level2">
-<h2><code>files</code></h2>
-<p>The %files section in a Singularity definition file is used to
-specify files or directories that should be included in the container
-image when it is built. Here is an example of what you might include in
-the %files section:</p>
+<div id="files" class="section level4">
+<h4><strong><code>files</code></strong></h4>
+<p>The <code>%files</code> section in a Singularity definition file is
+used to specify files or directories that should be included in the
+container image when it is built. Here is an example of what you might
+include in the <code>%files</code> section:</p>
 <pre><code>%files
 /path/to/myfile1.txt
 /path/to/mydir1
 /path/to/myfile2.sh
 /path/to/mydir2</code></pre>
-<p>This would include the files myfile1.txt and myfile2.sh and the
-directories mydir1 and mydir2 in the container image, with the same
-paths.</p>
+<p>This would include the files <code>myfile1.txt</code> and
+<code>myfile2.sh</code> and the directories <code>mydir1</code> and
+<code>mydir2</code> in the container image, with the same paths.</p>
 <p>You can also use wildcard to copy multiple files or directories, for
 example :</p>
 <pre><code>%files
 /path/to/mydir/*</code></pre>
-<p>This would include all files and directories in the folder mydir in
-the container image.</p>
-<p>It’s worth noting that the %files section is optional, you don’t need
-to include it in your definition file if you don’t need to add any
-additional files to your container. Also, the %files section is only
-useful when creating a new container, if you want to add files to an
-existing container you can use the singularity copy command.</p>
+<p>This would include all files and directories in the folder
+<code>mydir</code> in the container image.</p>
+<p>It’s worth noting that the <code>%files</code> section is optional,
+you don’t need to include it in your definition file if you don’t need
+to add any additional files to your container. Also, the
+<code>%files</code> section is only useful when creating a new
+container, if you want to add files to an existing container you can use
+the singularity copy command.</p>
 </div>
-<div id="environment" class="section level2">
-<h2><code>environment</code></h2>
-<p>The %environment section in a Singularity definition file is used to
-specify environment variables that should be set when the container is
-run. Here is an example of what you might include in the %environment
-section to build a container running R version 4.02:</p>
+<div id="environment" class="section level4">
+<h4><strong><code>environment</code></strong></h4>
+<p>The <code>%environment</code> section in a Singularity definition
+file is used to specify environment variables that should be set when
+the container is run. Here is an example of what you might include in
+the <code>%environment</code> section to build a container running R
+version 4.1.1:</p>
 <pre><code>%environment
-    export R_VERSION=4.02
+    export R_VERSION=4.1.1
     export R_HOME=/usr/lib/R/$R_VERSION
     export PATH=$PATH:$R_HOME/bin</code></pre>
-<p>This will set the environment variable R_VERSION to 4.02, the
-environment variable R_HOME to /usr/lib/R/4.02 and the environment
-variable PATH to include the R’s binary path $R_HOME/bin</p>
-<p>You can use these environment variables in your %post or %runscript
-sections to install R 4.02 and run commands with the R version 4.02.</p>
-<p>This will set the environment variable R_VERSION to 4.02, the
-environment variable R_HOME to /usr/lib/R/4.02 and the environment
-variable PATH to include the R’s binary path $R_HOME/bin</p>
-<p>You can use these environment variables in your %post or %runscript
-sections to install R 4.02 and run commands with the R version 4.02.</p>
+<p>This will set the environment variable <code>R_VERSION</code> to
+<code>4.1.1</code>, the environment variable <code>R_HOME</code> to
+<code>/usr/lib/R/4.1.1</code> and the environment variable
+<code>PATH</code> to include the R’s binary path
+<code>\$R_HOME/bin</code></p>
+<p>You can use these environment variables in your <code>%post</code> or
+<code>%runscript</code> sections to install R 4.1.1 and run commands
+with the R version 4.1.1.</p>
+<p>This will set the environment variable <code>R_VERSION</code> to
+4.1.1, the environment variable R_HOME to <code>/usr/lib/R/4.1.1</code>
+and the environment variable PATH to include the R’s binary path
+<code>\$R_HOME/bin</code></p>
+<p>You can use these environment variables in your <code>%post</code> or
+<code>%runscript</code> sections to install R 4.1.1 and run commands
+with the R version 4.1.1.</p>
 <pre><code>%post
     apt-get update &amp;&amp; apt-get install -y r-base=$R_VERSION</code></pre>
-<p>It’s worth noting that you can also use ENV instruction in place of
-export and you can use %environment section to set any environment
-variable you want, not only R.</p>
+<p>It’s worth noting that you can also use <code>ENV</code> instruction
+in place of export and you can use <code>%environment</code> section to
+set any environment variable you want, not only R.</p>
 </div>
-<div id="post" class="section level2">
-<h2><code>post</code></h2>
-<p>The %post section in a Singularity definition file is used to specify
-commands that should be run during the container build process, after
-the base image has been imported. Here is an example of what you might
-include in the %post section to build a container running R version 4.02
-and the most recent version of RStudio Server:</p>
+<div id="post" class="section level4">
+<h4><strong><code>post</code></strong></h4>
+<p>The <code>%post</code> section in a Singularity definition file is
+used to specify commands that should be run during the container build
+process, after the base image has been imported. Here is an example of
+what you might include in the <code>%post</code> section to build a
+container running R version 4.1.1 and the most recent version of RStudio
+Server:</p>
 <pre><code>%post
-    # update package lists and install R 4.02
+    # update package lists and install R 4.1.1
     apt-get update &amp;&amp; apt-get install -y r-base=$R_VERSION
     # add RStudio repository and key
     echo &quot;deb https://cran.rstudio.com/bin/linux/ubuntu bionic-cran35/&quot; | tee -a /etc/apt/sources.list
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
     # install RStudio Server
     apt-get update &amp;&amp; apt-get install -y rstudio-server</code></pre>
-<p>This will update the package lists, install R version 4.02 using the
+<p>This will update the package lists, install R version 4.1.1 using the
 environment variable set before and add the RStudio repository and key
 to the container, then install RStudio Server on the container.</p>
 <p>It’s worth noting that this example assumes that the container is
 based on Ubuntu 20.04 (codenamed ‘focal’), if you are using a different
 version or distribution you should adjust the package manager commands
 and repository URLs accordingly.</p>
-<p>Also, the %post section is optional and you don’t need to include it
-in your definition file if you don’t need to run any additional command
-during the container building process.</p>
+<p>Also, the <code>%post</code> section is optional and you don’t need
+to include it in your definition file if you don’t need to run any
+additional command during the container building process.</p>
 <p>If you also want to include Jupyter Notebook, the R kernel and R
 <em>nbextensions</em> in your container, you can add the following
-commands to the %post section of your Singularity definition file:</p>
+commands to the <code>%post</code> section of your Singularity
+definition file:</p>
 <pre><code>%post
-    # update package lists and install R 4.02
+    # update package lists and install R 4.1.1
     apt-get update &amp;&amp; apt-get install -y r-base=$R_VERSION
     # add RStudio repository and key
     echo &quot;deb https://cran.rstudio.com/bin/linux/ubuntu bionic-cran35/&quot; | tee -a /etc/apt/sources.list
@@ -624,13 +707,13 @@ repositories are available on your system and that you have internet
 connection during the container build process.</p>
 <p>Note: you can install packages from binaries.</p>
 </div>
-<div id="including-additional-packages" class="section level2">
-<h2>Including additional packages</h2>
+<div id="including-additional-packages" class="section level4">
+<h4>Including additional packages</h4>
 <p>To include TinyTeX and machine learning packages in your container,
-you can add the following commands to the %post section of your
-Singularity definition file:</p>
+you can add the following commands to the <code>%post</code> section of
+your Singularity definition file:</p>
 <pre><code>%post
-    # update package lists and install R 4.02
+    # update package lists and install R 4.1.1
     apt-get update &amp;&amp; apt-get install -y r-base=$R_VERSION
     # add RStudio repository and key
     echo &quot;deb https://cran.rstudio.com/bin/linux/ubuntu bionic-cran35/&quot; | tee -a /etc/apt/sources.list
@@ -660,11 +743,11 @@ learning packages such as caret, <code>randomForest</code>,
 <code>ROCR.plot</code>, <code>kernlab</code>, <code>pls</code>,
 <code>neuralnet</code>, and <code>nnet</code>.</p>
 </div>
-<div id="cleaning-temporary-files" class="section level2">
-<h2>Cleaning temporary files</h2>
+<div id="cleaning-temporary-files" class="section level4">
+<h4>Cleaning temporary files</h4>
 <p>To clean up temporary files during the build process of your
-container, you can add the following command to the %post section of
-your Singularity definition file:</p>
+container, you can add the following command to the <code>%post</code>
+section of your Singularity definition file:</p>
 <pre><code>%post
     # ... other commands ...
     # clean up temporary files
@@ -675,8 +758,8 @@ files. By doing this, it will help to keep your container’s size as
 small as possible, and can also help to avoid potential issues with the
 container.</p>
 <p>You can also include this set of commands at the end of your
-%runscript, so that when the container runs it will clean temporary
-files after the completion of the container’s job.</p>
+<code>%runscript</code>, so that when the container runs it will clean
+temporary files after the completion of the container’s job.</p>
 <pre><code>%runscript
    # commands to run your container
    ...
@@ -689,86 +772,13 @@ also added:</p>
     apt-get autoclean</code></pre>
 </div>
 </div>
-<div id="inside-pitágoras" class="section level1">
-<h1>Inside Pitágoras</h1>
-<ol style="list-style-type: decimal">
-<li><p>Remote desktop to Pitágoras</p></li>
-<li><p>Set the proxy by opening a Terminal and executing:</p></li>
-</ol>
-<!-- -->
-<pre><code>export https_proxy=http://USER:PASSWORD@proxy.bportugal.pt:8080
-    
-export http_proxy=http://USER:PASSWORD@proxy.bportugal.pt:8080</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Open Mousepad, top/left corner to write the singularity definition
-file</li>
-</ol>
-<div id="working-folder" class="section level2">
-<h2>Working folder</h2>
-<p><code>/mnt/cephfs/colaborativo/DEE-BPLIM-Filial/containers/</code></p>
-</div>
-<div id="supporting-files" class="section level2">
-<h2>Supporting files</h2>
-<p>The supporting files are located here</p>
-<p><code>/mnt/cephfs/colaborativo/DEE-BPLIM-Filial/containers/_SOURCES</code></p>
-<p>Due to restrictions in the filesystem, we cannot build the container
-in <em>colaborativo</em>. Instead, we have to build it in our home
-folder. We recommend you use a folder like
-<code>/mnt/cephfs/home/exu0o9@bdp.pt/containers/6.BigData/</code>, which
-contains a replica of the definition file written in
-<em>colaborativo</em>.</p>
-<p>In the following example we will build a container with Stata, where
-all material is located in
-<code>/mnt/cephfs/colaborativo/DEE-BPLIM-Filial/containers/7.Stata/</code>.</p>
-<p>Once the container is built, you should move it to the corresponding
-folder in <em>colaborativo</em>.</p>
-<!--
-# Commands to build the Image
-
-    cd /mnt/cephfs/colaborativo/DEE-BPLIM-Filial/containers/
-    export https_proxy=http://exu0o9:Santarem%2121@proxy.bportugal.pt:8080
-    export http_proxy=http://exu0o9:Santarem%2121@proxy.bportugal.pt:8080
-    singularity build --fakeroot i15.BPLIM_Python_R_Julia_Stata_JupyterLab.sif 15.BPLIM_Python_R_Julia_Stata_JupyterLab.def 
-
-    Once you Finish type
-
-        unset https_proxy
-        unset http_proxy
--->
-</div>
 <div id="building-the-container" class="section level2">
 <h2>Building the container</h2>
-<pre><code>time singularity build --fakeroot iDPG-FormacaoPAY_V11.sif DPG-FormacaoPAY_V11.def</code></pre>
-<p>I usually name the image with the prefix <code>i</code> followed by
+<pre><code>time singularity build --fakeroot iPROJECT_ID.BPLIM_Python_R_Jupyter.sif PROJECT_ID.BPLIM_Python_R_Jupyter.def</code></pre>
+<p>We usually name the image with the prefix <code>i</code> followed by
 the name of the definition file. For example,
 <code>iBPLIM-Stata_V1.sif</code>, where the definition file is named
 <code>BPLIM-Stata_V1.def</code>.</p>
-</div>
-<div id="copy-the-container-to-the-internal-server" class="section level2">
-<h2>Copy the container to the internal server</h2>
-<pre><code>scp P112_ReisQueiro_requirements_Rev.1.txt exu0o9@sipe-bplim-int.bdp.pt:/bplim/data/singularity</code></pre>
-<p>You should also copy the definition file associated with the
-container.</p>
-</div>
-<div id="running-the-container-inside-the-pitagorass-main-infrastructure" class="section level2">
-<h2>Running the Container inside the Pitagoras’s main
-infrastructure</h2>
-<pre><code>condor_submit -i
-singularity shell i15.BPLIM_Python_R_Julia_Stata_JupyterLab.sif 
-jupyter lab</code></pre>
-<p>Type ‘exit’ to leave the singularity image.</p>
-<p>Once you finish the execution leave ‘Condor’ by typing
-<code>exit</code>.</p>
-<p>Note: Alternatively, you can use Pitagoras graphical interface to run
-the container (the icon is a brain).</p>
-</div>
-<div id="running-the-container-outside-pitagorass-main-infrastructure" class="section level2">
-<h2>Running the Container outside Pitagoras’s main infrastructure</h2>
-<pre><code>singularity shell i15.BPLIM_Python_R_Julia_Stata_JupyterLab.sif </code></pre>
-<p>and inside the container</p>
-<pre><code>jupyter notebook</code></pre>
-<p>Once you finish using the container type <code>exit</code> to leave
-the singularity image.</p>
 </div>
 </div>
 <div id="building-the-container-online" class="section level1">
@@ -776,25 +786,29 @@ the singularity image.</p>
 <p>There are several cloud-based solutions that allow you to build
 Singularity containers online. Here are a few options:</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Singularity Hub</strong>: This is a cloud-based service
-that allows you to build and host Singularity containers. You can
-connect your GitHub or GitLab repository to Singularity Hub, and it will
-automatically build your container when changes are pushed to the
-repository.</p></li>
-<li><p><strong>Azure Container Instances</strong>: You can use Azure
-Container Instances (ACI) to build and run Singularity containers in the
-cloud. This service allows you to create and manage containers without
-the need to manage the underlying infrastructure.</p></li>
-<li><p><strong>Google Cloud Build</strong>: You can use Google Cloud
-Build to build your Singularity containers in the cloud. Cloud Build can
-be triggered by pushes to a connected GitHub or Bitbucket
-repository.</p></li>
-<li><p><strong>AWS Batch</strong>: AWS Batch is a service that allows
-you to run batch computing workloads on the AWS cloud. You can use AWS
-Batch to build your Singularity containers in the cloud.</p></li>
-<li><p><strong>GitLab’s Container Registry</strong>: GitLab’s Container
-Registry is a built-in feature of GitLab that allows you to build and
-store your container images directly in your GitLab repository.</p></li>
+<li><p><a href="https://cloud.sylabs.io/"><strong>Sylabs</strong></a></p></li>
+<li><p><a href="https://singularityhub.github.io/"><strong>Singularity
+Hub</strong></a>: This is a cloud-based service that allows you to build
+and host Singularity containers. You can connect your GitHub or GitLab
+repository to Singularity Hub, and it will automatically build your
+container when changes are pushed to the repository.</p></li>
+<li><p><a href="https://portal.azure.com/"><strong>Azure Container
+Instances</strong></a>: You can use Azure Container Instances (ACI) to
+build and run Singularity containers in the cloud. This service allows
+you to create and manage containers without the need to manage the
+underlying infrastructure.</p></li>
+<li><p><a href="https://cloud.google.com/build"><strong>Google Cloud
+Build</strong></a>: You can use Google Cloud Build to build your
+Singularity containers in the cloud. Cloud Build can be triggered by
+pushes to a connected GitHub or Bitbucket repository.</p></li>
+<li><p><a href="https://aws.amazon.com/batch/"><strong>AWS
+Batch</strong></a>: AWS Batch is a service that allows you to run batch
+computing workloads on the AWS cloud. You can use AWS Batch to build
+your Singularity containers in the cloud.</p></li>
+<li><p><a href="https://about.gitlab.com/blog/2016/05/23/gitlab-container-registry/"><strong>GitLab’s
+Container Registry</strong></a>: GitLab’s Container Registry is a
+built-in feature of GitLab that allows you to build and store your
+container images directly in your GitLab repository.</p></li>
 </ol>
 <p>Each of these services has its own unique set of features and pricing
 plans. You should evaluate each one based on your specific needs and
@@ -802,6 +816,8 @@ requirements.</p>
 </div>
 <div id="appendix" class="section level1">
 <h1>Appendix</h1>
+<div id="an-example-of-a-singularity-definition-file" class="section level2">
+<h2>An example of a Singularity definition file</h2>
 <pre><code>    Bootstrap: docker
     From: ubuntu:20.04
     IncludeCmd: yes
@@ -872,12 +888,20 @@ requirements.</p>
         apt-get update
         apt-get autoremove
         apt-get autoclean</code></pre>
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-BPLIMguide" class="csl-entry">
+Banco de Portugal. (2022). <em><span class="nocase">Guide for
+Researchers</span></em> (Version October 20, 2022). Available as <a href="https://msites-dee-bplim-prd.azurewebsites.net/sites/default/files/guide_for_researchers_v202210.pdf" class="uri">https://msites-dee-bplim-prd.azurewebsites.net/sites/default/files/guide_for_researchers_v202210.pdf</a>;
+BPLIM - Banco de Portugal.
+</div>
+</div>
+</div>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr />
 <ol>
 <li id="fn1"><p>See the installation notes on <a href="https://docs.sylabs.io/guides/3.2/user-guide/installation.html">Sylabs</a>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Check remote access to Pitágoras.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>For more information, please visit <a href="https://github.com/BPLIM">BPLIM’s GitHub resources</a>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
