@@ -1,0 +1,72 @@
+Bootstrap: docker
+From: ubuntu:20.04
+IncludeCmd: yes
+
+%files
+  BPLIM_Stata17_Jupyter_nbstata_V01.do
+  /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/libpng12-0_1.2.54-1ubuntu1.11ppa0eoan_amd64.deb
+  /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/stata17.tar.gz
+
+
+%environment
+   TZ=Europe/Lisbon
+   export PATH="/opt/stata17:$PATH"
+
+
+%labels
+  Author         :: Miguel Portela -- BPLIM
+  Version        :: Stata 17 with Jupyter & nbstata - V01
+  Build_date     :: July 11, 2023
+
+
+%post
+    apt-get -y update
+    apt-get -y upgrade
+    apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/London" apt-get -y install apt-transport-https apt-utils software-properties-common wget git bzip2 zip pandoc texlive-latex-base xkb-data x11-apps libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 libncurses5 libgtk2.0-0
+
+
+# Install Stata from local .tar file
+    tar -xvzf /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/stata17.tar.gz --no-same-owner
+    mv stata17 /opt/
+    dpkg -i /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/libpng12-0_1.2.54-1ubuntu1.11ppa0eoan_amd64.deb
+    export PATH="/opt/stata17:$PATH"
+
+    # install ado files
+	mkdir plus
+    
+    # Install .ado files
+	stata-mp -b do BPLIM_Stata17_Jupyter_nbstata_V01.do
+    
+    echo "INSTALL ADO::END"
+
+    mv plus /opt/stata17/ado/
+    chmod -R ugo=rwx /opt/stata17/
+
+
+# Install Python Packages
+	apt install -y python3-pip
+	python3 -m pip install -U pip
+	python3 -m pip install -U setuptools
+	pip3 install nbstata
+	python3 -m nbstata.install --sys-prefix --conf-file
+  
+
+# Firefox
+    apt-get update && apt update && apt update -qq
+    apt-get install -y firefox
+
+
+# Jupyter
+    pip3 install jupyterlab
+
+  # Jupyter extensions
+    pip3 install jupyter_contrib_nbextensions jupyter_nbextensions_configurator RISE
+    jupyter contrib nbextensions install --system
+    jupyter nbextensions_configurator enable --system
+
+
+# CLEAN temporary files
+
+    apt-get update
+    apt-get autoremove
+    apt-get autoclean
