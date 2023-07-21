@@ -17,7 +17,7 @@ The first example, `Jupyter`, relates to a container with Stata and Jupyter note
 - **Jupyter Setup:** JupyterLab and various Jupyter extensions such as `jupyter_contrib_nbextensions`, `jupyter_nbextensions_configurator`, and `RISE` are installed. This setup allows notebooks to have extended functionality.
 
 
-# The second container, `Parquet`, adds the ability to handle parquet files.
+The second container, `Parquet`, adds the ability to handle parquet files.
 
 This container has Stata and supports the Apache Parquet columnar storage format. It's designed to leverage the high-speed data analytics capabilities of Apache Parquet within Stata's framework.
 
