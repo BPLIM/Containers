@@ -19,6 +19,8 @@
 
 > The second container, `Parquet`, adds the ability to handle parquet files.
 
+We thank Mauricio Caceres Bravo for his all his availability and assistance in building the container. His `stata-parquet` project can be accessed at [https://github.com/mcaceresb/stata-parquet](https://github.com/mcaceresb/stata-parquet).
+
 This container has Stata and supports the Apache Parquet columnar storage format. It's designed to leverage the high-speed data analytics capabilities of Apache Parquet within Stata's framework.
 
 The setup involves a custom Conda environment, 'stata-parquet', installed from an external YAML file. The environment is activated and contains all required packages to ensure compatibility between Stata and Parquet.
