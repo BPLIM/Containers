@@ -1,4 +1,4 @@
-# Container with python miniconda and jupyter lab
+# Container with Python, Miniconda and Jupyter Lab
 
 This Singularity container possesses key characteristics that make it a conducive environment for scientific computing:
 
