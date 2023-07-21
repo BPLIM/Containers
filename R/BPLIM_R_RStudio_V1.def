@@ -17,7 +17,7 @@ From: ubuntu:20.04
 %post
 	apt-get update
 	apt update
-	apt install -y apt-transport-https apt-utils software-properties-common dirmngr curl wget firefox libnss3 libgbm1 libcurl4-openssl-dev libssl-dev libxml2-dev
+	apt install -y apt-transport-https apt-utils software-properties-common dirmngr curl wget libnss3 libgbm1 libcurl4-openssl-dev libssl-dev libxml2-dev
 	apt-get install --reinstall dbus
 
 	apt-get update && ACCEPT_EULA=Y && apt-get install -y locales locales-all
