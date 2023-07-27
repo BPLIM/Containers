@@ -1,6 +1,6 @@
 # There are two examples in this folder.
 
-> The first example, `Jupyter`, relates to a container with Stata and Jupyter notebooks.
+## 1. The first example, `Jupyter`, relates to a container with Stata and Jupyter notebooks.
 
 - **Files:** This container incorporates a Stata 'do' file (`BPLIM_Stata17_Jupyter_nbstata_V01.do`), and two packages (`libpng12-0_1.2.54-1ubuntu1.11ppa0eoan_amd64.deb` and `stata17.tar.gz`) from an external directory in the host system.
 
@@ -17,7 +17,7 @@
 - **Jupyter Setup:** JupyterLab and various Jupyter extensions such as `jupyter_contrib_nbextensions`, `jupyter_nbextensions_configurator`, and `RISE` are installed. This setup allows notebooks to have extended functionality.
 
 
-> The second container, `Parquet`, adds the ability to handle parquet files.
+## 2. The second container, `Parquet`, adds the ability to handle parquet files.
 
 We thank Mauricio Caceres Bravo for his all his availability and assistance in building the container. His `stata-parquet` project can be accessed at [https://github.com/mcaceresb/stata-parquet](https://github.com/mcaceresb/stata-parquet).
 
