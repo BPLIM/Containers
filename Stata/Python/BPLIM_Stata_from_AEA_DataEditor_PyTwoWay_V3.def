@@ -78,14 +78,14 @@ apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/Lond
     echo 'set python_exec "/usr/local/pyenv/versions/3.10.0/bin/python3", perm' > /usr/local/stata/profile.do
     echo 'adopath ++ "/opt/stata17/ado/plus"' >> /usr/local/stata/profile.do
 
-    chmod -R o=rx /opt/stata17/
+    chmod -R o=rx /usr/local/stata/
 
 
 # CLEAN temporary files
 
-#    apt-get update --yes
-#    apt-get autoremove --yes
-#    apt-get autoclean --yes
+    apt-get update --yes
+    apt-get autoremove --yes
+    apt-get autoclean --yes
 
 ## HOW to RUN THE CONTAINER
-	# singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_Stata_from_AEA_DataEditor_PyTwoWay_V3.sif
+# singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_Stata_from_AEA_DataEditor_PyTwoWay_V3.sif
