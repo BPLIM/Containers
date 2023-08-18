@@ -1,0 +1,91 @@
+Bootstrap: library
+From: larsvilhuber/dataeditors/stata17:2022-01-17
+IncludeCmd: yes
+
+
+%environment
+  TZ=Europe/Lisbon
+  export DEBIAN_FRONTEND="noninteractive"
+  export PATH="/usr/local/pyenv/versions/3.10.0/bin/:/usr/local/stata:$PATH"
+
+
+%labels
+  Author         :: Miguel Portela -- BPLIM
+  Version        :: Stata 17 with Jupyter & PyTwoWay - V01
+  Build_date     :: August, 2023
+
+
+%post
+
+    export DEBIAN_FRONTEND="noninteractive"
+    export TZ="Europe/London"
+
+    apt -y update
+    apt -y upgrade
+
+apt -y install git curl make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+mkdir /usr/local/pyenv
+
+export PYENV_ROOT="/usr/local/pyenv"
+
+git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT
+chown -R root:users /usr/local/pyenv
+
+echo 'export PYENV_ROOT="$PYENV_ROOT"' >> /etc/profile
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> /etc/profile
+
+cd /usr/local/pyenv
+
+/usr/local/pyenv/bin/pyenv install 3.10.0
+/usr/local/pyenv/bin/pyenv global 3.10.0
+
+update-alternatives --install /usr/bin/python3 python3 /usr/local/pyenv/versions/3.10.0/bin/python3.10 1
+
+
+apt -y install apt-transport-https apt-utils software-properties-common wget git bzip2 zip pandoc texlive-latex-base xkb-data x11-apps libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 libncurses5 libgtk2.0-0 firefox
+
+apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/London" apt-get -y install --no-install-recommends apt-transport-https apt-utils software-properties-common wget git bzip2 build-essential make cmake gcc libgoogle-glog-dev \
+    dirmngr curl xkb-data x11-apps qt5-default mesa-utils libgl1-mesa-dev libgl1-mesa-glx libegl1-mesa libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 \
+    libxtst6 iproute2 swig libnss3 net-tools unixodbc-dev vim krb5-user libncurses5 libxml2-dev libsasl2-dev libldap2-dev libssl-dev libnlopt-dev gnupg gnupg2 unixodbc \
+    gfortran nano libblas3 libblas-dev liblapack-dev liblapack3 aptitude xorg-dev libreadline-dev libpcre3-dev liblzma-dev libbz2-dev libcurl4-openssl-dev libmagick++-dev \
+    libhdf5-dev hdf5-helpers gsl-bin libgsl-dev libgsl23 libgslcblas0 libgdal-dev libproj-dev libzmq3-dev libgtk2.0-0 zip
+
+
+# Install Python Packages
+
+    wget https://bootstrap.pypa.io/get-pip.py
+    python3 get-pip.py
+
+	/usr/local/pyenv/versions/3.10.0/bin/pip3 install pytwoway
+
+
+#  Jupyter
+
+	apt update && apt install -y libzmq3-dev libcurl4-openssl-dev libssl-dev
+	/usr/local/pyenv/versions/3.10.0/bin/pip3 install jupyterlab notebook
+
+
+# Stata
+
+    # Install .ado files
+	mkdir plus
+	wget https://github.com/BPLIM/Containers/blob/main/Stata/Python/BPLIM_Stata17_PyTwoWay_BLM_V05.do
+	stata-mp -b do BPLIM_Stata17_PyTwoWay_BLM_V05.do
+    
+    mv plus /opt/stata17/ado/
+    
+    echo 'set python_exec "/usr/local/pyenv/versions/3.10.0/bin/python3", perm' > /usr/local/stata/profile.do
+    echo 'adopath ++ "/opt/stata17/ado/plus"' >> /usr/local/stata/profile.do
+
+    chmod -R o=rx /opt/stata17/
+
+
+# CLEAN temporary files
+
+#    apt-get update --yes
+#    apt-get autoremove --yes
+#    apt-get autoclean --yes
+
+## HOW to RUN THE CONTAINER
+	# singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_Stata_from_AEA_DataEditor_PyTwoWay_V3.sif
