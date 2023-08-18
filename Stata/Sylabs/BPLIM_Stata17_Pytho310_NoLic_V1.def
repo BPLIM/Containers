@@ -43,7 +43,8 @@ update-alternatives --install /usr/bin/python3 python3 /usr/local/pyenv/versions
 
 
 # Install Stata from local .tar file
-    wget https://www.dropbox.com/scl/fi/haickv0za5j3t478hz9n3/stata17_NoLic.tar.gz?rlkey=y4pefe36s2597ua16mhrnt8cp&dl=0
+#    wget https://www.dropbox.com/scl/fi/haickv0za5j3t478hz9n3/stata17_NoLic.tar.gz?rlkey=y4pefe36s2597ua16mhrnt8cp&dl=0
+wget https://www1.eeg.uminho.pt/economia/mangelo/_containers/stata17_NoLic.tar.gz
     tar -xvzf stata17_NoLic.tar.gz --no-same-owner
     mv stata17 /usr/local/
     export PATH="/usr/local/stata17:$PATH"
