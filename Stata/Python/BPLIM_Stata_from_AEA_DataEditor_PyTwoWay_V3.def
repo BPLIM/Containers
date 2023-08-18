@@ -46,7 +46,7 @@ cd /usr/local/pyenv
 update-alternatives --install /usr/bin/python3 python3 /usr/local/pyenv/versions/3.10.0/bin/python3.10 1
 
 
-apt -y install apt-transport-https apt-utils software-properties-common wget git bzip2 zip pandoc texlive-latex-base xkb-data x11-apps libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 libncurses5 libgtk2.0-0 firefox
+apt -y install apt-transport-https apt-utils software-properties-common wget bzip2 zip pandoc texlive-latex-base xkb-data x11-apps libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 libncurses5 libgtk2.0-0 firefox
 
 apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/London" apt-get -y install --no-install-recommends apt-transport-https apt-utils software-properties-common wget git bzip2 build-essential make cmake gcc libgoogle-glog-dev \
     dirmngr curl xkb-data x11-apps qt5-default mesa-utils libgl1-mesa-dev libgl1-mesa-glx libegl1-mesa libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 \
@@ -73,7 +73,7 @@ apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/Lond
 
     # Install .ado files
 	mkdir plus
-	wget https://github.com/BPLIM/Containers/blob/main/Stata/Python/BPLIM_Stata17_PyTwoWay_BLM_V05.do
+	wget https://raw.githubusercontent.com/BPLIM/Containers/main/Stata/Python/BPLIM_Stata17_PyTwoWay_BLM_V05.do
 	stata-mp -b do BPLIM_Stata17_PyTwoWay_BLM_V05.do
     
     mv plus /usr/local/stata/ado/

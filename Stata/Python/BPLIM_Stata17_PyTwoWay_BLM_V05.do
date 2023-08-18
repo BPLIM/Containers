@@ -21,11 +21,10 @@ if r(N) == 4 {
 
     sysdir set PLUS "plus"
     ssc install adoinstall
-
+clear
 
 * # 1. Install 'gtools'
 	adoinstall gtools,from("https://raw.githubusercontent.com/mcaceresb/stata-gtools/master/build/") to(plus)
-	gtools, upgrade
 
 
 * # 2. Install 'ftools' (remove program if it existed previously)
@@ -33,10 +32,8 @@ if r(N) == 4 {
 
 
 * # 3. Install 'reghdfe' & 'ppmlhdfe'
-	cap ado uninstall reghdfe
 	adoinstall reghdfe, from("https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/") to(plus)
 
-	cap ado uninstall ppmlhdfe
 	adoinstall ppmlhdfe, from("https://raw.githubusercontent.com/sergiocorreia/ppmlhdfe/master/src/") to(plus)
 
 * # 4. Install 'panelstat'
