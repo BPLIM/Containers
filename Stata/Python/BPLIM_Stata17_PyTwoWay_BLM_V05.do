@@ -13,7 +13,7 @@ capture count
 if r(N) == 4 {
       set httpproxy        on
       set httpproxyhost    "`HOST'"
-      set httpproxyport    "`PORT'"
+      set httpproxyport    `PORT'
       set httpproxyauth    on
       set httpproxyuser    "`USER'"
       set httpproxypw      "`SECRET'"
