@@ -10,8 +10,11 @@ IncludeCmd: yes
 
 
 %labels
-  Author         :: Miguel Portela -- BPLIM
-  Version        :: Stata 17 with Jupyter & PyTwoWay - V01
+
+  Author         :: Built from Lars Vilhuber; adapted by Miguel Portela -- BPLIM
+  Version        :: https://cloud.sylabs.io/library/larsvilhuber/dataeditors/stata17
+  AEA Data Editor:: https://github.com/AEADataEditor/docker-stata
+  NOTE           :: singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_Stata_from_AEA_DataEditor_PyTwoWay_V3.sif
   Build_date     :: August, 2023
 
 
