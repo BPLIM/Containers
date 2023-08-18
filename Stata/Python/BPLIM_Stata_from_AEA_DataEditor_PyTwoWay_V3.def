@@ -73,7 +73,7 @@ apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/Lond
 	wget https://github.com/BPLIM/Containers/blob/main/Stata/Python/BPLIM_Stata17_PyTwoWay_BLM_V05.do
 	stata-mp -b do BPLIM_Stata17_PyTwoWay_BLM_V05.do
     
-    mv plus /opt/stata17/ado/
+    mv plus /usr/local/stata/ado/
     
     echo 'set python_exec "/usr/local/pyenv/versions/3.10.0/bin/python3", perm' > /usr/local/stata/profile.do
     echo 'adopath ++ "/opt/stata17/ado/plus"' >> /usr/local/stata/profile.do
