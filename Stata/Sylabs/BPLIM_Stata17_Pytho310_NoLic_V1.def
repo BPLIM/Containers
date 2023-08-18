@@ -5,7 +5,7 @@ IncludeCmd: yes
 %environment
   TZ="Europe/London"
   DEBIAN_FRONTEND="noninteractive"
-  export PATH="/usr/local/pyenv/versions/3.10.0/bin/:/opt/stata17:$PATH"
+  export PATH="/usr/local/pyenv/versions/3.10.0/bin/:/usr/local/stata17:$PATH"
 
 
 %labels
@@ -45,10 +45,10 @@ update-alternatives --install /usr/bin/python3 python3 /usr/local/pyenv/versions
 # Install Stata from local .tar file
     wget https://www.dropbox.com/scl/fi/haickv0za5j3t478hz9n3/stata17_NoLic.tar.gz?rlkey=eayqxe6xfls0ge9g3knpfpfqp&dl=0
     tar -xvzf stata17_NoLic.tar.gz --no-same-owner
-    mv stata17 /opt/
-    export PATH="/opt/stata17:$PATH"
+    mv stata17 /usr/local/
+    export PATH="/usr/local/stata17:$PATH"
 
-    echo 'set python_exec "/usr/local/pyenv/versions/3.10.0/bin/python3", perm' > /opt/stata17/profile.do
+    echo 'set python_exec "/usr/local/pyenv/versions/3.10.0/bin/python3", perm' > /usr/local/stata17/profile.do
 
 
 # Install pip
