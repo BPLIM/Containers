@@ -4,7 +4,7 @@ author: "[BPLIM](https://bplim.bportugal.pt/)"
 date: "`r Sys.setlocale('LC_TIME','English'); format(Sys.time(), '%B %Y')`"
 format:
   html:
-    theme: cosmo
+    theme: journal
     embed-resources: true
     toc: true
     toc-location: left
@@ -18,52 +18,47 @@ output:
     citation_package: citeproc
 ---
 
-
 This guide provides instructions on how to use containers in BPLIM's infrastructure. Follow these steps to request a container for your project:
 
-1. Determine your requirements: Before requesting a container, identify your specific needs for statistical tools, packages, and any other necessary software.
+1.  Determine your requirements: Before requesting a container, identify your specific needs for statistical tools, packages, and any other necessary software.
 
-2. Contact BPLIM's team: After identifying your container requirements, reach out to BPLIM's team by sending an email to `bplim@bportugal.pt` with the details from Step 1.
+2.  Contact BPLIM's team: After identifying your container requirements, reach out to BPLIM's team by sending an email to `bplim@bportugal.pt` with the details from Step 1.
 
-3. Await a response: After submitting your request, you will receive a response from BPLIM's team. The team will review your requirements and provide you with a container that meets your specifications.
+3.  Await a response: After submitting your request, you will receive a response from BPLIM's team. The team will review your requirements and provide you with a container that meets your specifications.
 
-4. Configure the container: Once the container is ready, BPLIM's team will configure it for you and provide you with the necessary details to access and utilize the container.
+4.  Configure the container: Once the container is ready, BPLIM's team will configure it for you and provide you with the necessary details to access and utilize the container.
 
-5. Review the container: Upon receiving the container, carefully review it to ensure that it meets your requirements. Contact BPLIM if you have any questions or concerns that need clarification.
-
+5.  Review the container: Upon receiving the container, carefully review it to ensure that it meets your requirements. Contact BPLIM if you have any questions or concerns that need clarification.
 
 # Access to the container
 
-
-### Alternative A: use a pre-defined setup
+## Alternative A: use a pre-defined setup
 
 Once you have logged in to the server, you will see an icon that opens the container for your project. To launch the container and start the predefined application that you specified in your request, simply double-click on the icon. Once you have completed this step, it will function similarly to any other application.
 
-
-### Alternative B: use the command line
+## Alternative B: use the command line
 
 This solution makes use of the `Terminal`, giving you more freedom to interact with the container. Follow the steps below:
 
-1. Open a Terminal in your project's work_area (e.g., `/bplimext/projects/PROJECT_ID/work_area`).
+1.  Open a Terminal in your project's work_area (e.g., `/bplimext/projects/PROJECT_ID/work_area`).
 
-2. The container is located in your project's tools folder (`/bplimext/projects/PROJECT_ID/tools`).
+2.  The container is located in your project's tools folder (`/bplimext/projects/PROJECT_ID/tools`).
 
-3. Run the container using the following command:
+3.  Run the container using the following command:
 
 `singularity shell ../tools/iPROJECT_ID.BPLIM_Python_R_Jupyter.sif`
 
-4. Inside the container, the prompt will change to `Singularity >`
+4.  Inside the container, the prompt will change to `Singularity >`
 
 > ![](images/prompt_singularity.PNG)
 
-5. For example, to open a Jupyter Notebook, type:
+5.  For example, to open a Jupyter Notebook, type:
 
 `jupyter notebook`
 
 If you want to use Stata or RStudio, type `xstata-mp` or `rstudio`, respectively.
 
-6. When you're finished using the container, type exit to leave the Singularity image.
-
+6.  When you're finished using the container, type exit to leave the Singularity image.
 
 # Build and replicate the container of your project
 
@@ -75,14 +70,13 @@ You also have the option to write your own script for your project's container, 
 
 The steps to build a Singularity container discussed below are designed for Linux, but with minor adjustments, they can also be applied in other environments.
 
-Note that although it is possible to build Singularity containers on Windows, it requires a Linux virtual machine or a Windows Subsystem for Linux (WSL) environment. Once you have set up a Linux environment, you can use the Singularity command-line tools to build your container.[^2]
+Note that although it is possible to build Singularity containers on Windows, it requires a Linux virtual machine or a Windows Subsystem for Linux (WSL) environment. Once you have set up a Linux environment, you can use the Singularity command-line tools to build your container.[^1]
 
-[^2]: See the installation notes on [Sylabs](https://docs.sylabs.io/guides/3.2/user-guide/installation.html).
+[^1]: See the installation notes on [Sylabs](https://docs.sylabs.io/guides/3.2/user-guide/installation.html).
 
-In addition to this guide, please refer to BPLIM's Guide for Researchers (@BPLIMguide) for more information.[^1]
+In addition to this guide, please refer to BPLIM's Guide for Researchers (@BPLIMguide) for more information.[^2]
 
-[^1]: For more information, please visit [BPLIM's GitHub resources](https://github.com/BPLIM).
-
+[^2]: For more information, please visit [BPLIM's GitHub resources](https://github.com/BPLIM).
 
 ## Starting point: the container
 
@@ -104,15 +98,12 @@ Here are the basic steps to build a container:
 
 In the [Appendix](#appendix) of this manual, you will find an example of a definition file for building a container with Stata. For detailed instructions and troubleshooting, you can refer to the official documentation at https://sylabs.io/guides/3.6/user-guide/index.html. Additionally, here is a simple recipe file that creates a container based on the Ubuntu 20.04 base image and installs the nano text editor:
 
-```
-    Bootstrap: library
-    From: ubuntu:20.04
+        Bootstrap: library
+        From: ubuntu:20.04
 
-    %post
-        apt-get update
-        apt-get install -y nano
-```
-
+        %post
+            apt-get update
+            apt-get install -y nano
 
 ## The definition file step by step
 
@@ -132,28 +123,24 @@ In a Singularity definition file, you can write a variety of commands and instru
 
 It's worth noting that depending on the complexity of your container and the requirements of your application, you may need to include additional commands and instructions in your definition file.
 
-
 #### **`header`**
 
 In a Singularity definition file, the "header" refers to the first section of the file that contains metadata and instructions for building the container. The header typically includes information such as the container's name, version, and author, as well as instructions for obtaining and installing the software that the container is designed to run. The header also can include instructions for configuring the build environment, such as setting environment variables or installing dependencies. The header is usually written in a specific format (e.g. #!Singularity) and starts at the first line of the file.
 
-```
-    #!Singularity
-    Bootstrap: library
-    From: ubuntu:20.04
+        #!Singularity
+        Bootstrap: library
+        From: ubuntu:20.04
 
-    %help
-    This container runs Stata.
+        %help
+        This container runs Stata.
 
-    %labels
-    AUTHOR BPLIM
-    VERSION v1.0
-```
+        %labels
+        AUTHOR BPLIM
+        VERSION v1.0
 
 This header uses the `Bootstrap: library` to indicate that the container should be built using the Singularity Library, and uses the `From: ubuntu:20.04` to indicate that the container is based on the Ubuntu 20.04 image. This header also includes a `%help` section that provides a brief description of the container, and a `%labels` section that includes information about the container's author and version.
 
 It's worth noting that the way headers are written is not fixed and different instructions could be included.
-
 
 #### **`runscript`**
 
@@ -179,7 +166,6 @@ In case you want the container to execute a Stata .do file you can write somethi
             exit 0
         fi
 
-
 #### **`files`**
 
 The `%files` section in a Singularity definition file is used to specify files or directories that should be included in the container image when it is built. Here is an example of what you might include in the `%files` section:
@@ -200,7 +186,6 @@ You can also use wildcard to copy multiple files or directories, for example :
 This would include all files and directories in the folder `mydir` in the container image.
 
 It's worth noting that the `%files` section is optional, you don't need to include it in your definition file if you don't need to add any additional files to your container. Also, the `%files` section is only useful when creating a new container, if you want to add files to an existing container you can use the singularity copy command.
-
 
 #### **`environment`**
 
@@ -223,7 +208,6 @@ You can use these environment variables in your `%post` or `%runscript` sections
         apt-get update && apt-get install -y r-base=$R_VERSION
 
 It's worth noting that you can also use `ENV` instruction in place of export and you can use `%environment` section to set any environment variable you want, not only R.
-
 
 #### **`post`**
 
@@ -270,7 +254,6 @@ It's worth noting that these commands are installing R packages from CRAN and Gi
 
 Note: you can install packages from binaries.
 
-
 #### Including additional packages
 
 To include TinyTeX and machine learning packages in your container, you can add the following commands to the `%post` section of your Singularity definition file:
@@ -299,7 +282,6 @@ To include TinyTeX and machine learning packages in your container, you can add 
 
 This will install TinyTeX, which is a lightweight, cross-platform, and easy-to-maintain LaTeX distribution and also some popular machine learning packages such as caret, `randomForest`, `e1071`, `gbm`, `xgboost`, `lightgbm`, `catboost`, `mlr`, `tidymodels`, `h2o`, `caretEnsemble`, `pROC`, `ROCR`, `pROC.plot`, `ROCR.plot`, `kernlab`, `pls`, `neuralnet`, and `nnet`.
 
-
 #### Cleaning temporary files
 
 To clean up temporary files during the build process of your container, you can add the following command to the `%post` section of your Singularity definition file:
@@ -326,107 +308,101 @@ In the example provided in the [Appendix](#appendix) we also added:
         apt-get autoremove
         apt-get autoclean
 
-
 ## Building the container
 
     time singularity build --fakeroot iPROJECT_ID.BPLIM_Python_R_Jupyter.sif PROJECT_ID.BPLIM_Python_R_Jupyter.def
 
 We usually name the image with the prefix `i` followed by the name of the definition file. For example, `iBPLIM-Stata_V1.sif`, where the definition file is named `BPLIM-Stata_V1.def`.
 
-
 # Building the container online
 
 There are several cloud-based solutions that allow you to build Singularity containers online. Here are a few options:
 
-1. [**Sylabs**](https://cloud.sylabs.io/)
+1.  [**Sylabs**](https://cloud.sylabs.io/)
 
-6.  [**Singularity Hub**](https://singularityhub.github.io/): This is a cloud-based service that allows you to build and host Singularity containers. You can connect your GitHub or GitLab repository to Singularity Hub, and it will automatically build your container when changes are pushed to the repository.
+2.  [**Singularity Hub**](https://singularityhub.github.io/): This is a cloud-based service that allows you to build and host Singularity containers. You can connect your GitHub or GitLab repository to Singularity Hub, and it will automatically build your container when changes are pushed to the repository.
 
-2.  [**Azure Container Instances**](https://portal.azure.com/): You can use Azure Container Instances (ACI) to build and run Singularity containers in the cloud. This service allows you to create and manage containers without the need to manage the underlying infrastructure.
+3.  [**Azure Container Instances**](https://portal.azure.com/): You can use Azure Container Instances (ACI) to build and run Singularity containers in the cloud. This service allows you to create and manage containers without the need to manage the underlying infrastructure.
 
-3.  [**Google Cloud Build**](https://cloud.google.com/build): You can use Google Cloud Build to build your Singularity containers in the cloud. Cloud Build can be triggered by pushes to a connected GitHub or Bitbucket repository.
+4.  [**Google Cloud Build**](https://cloud.google.com/build): You can use Google Cloud Build to build your Singularity containers in the cloud. Cloud Build can be triggered by pushes to a connected GitHub or Bitbucket repository.
 
-4.  [**AWS Batch**](https://aws.amazon.com/batch/): AWS Batch is a service that allows you to run batch computing workloads on the AWS cloud. You can use AWS Batch to build your Singularity containers in the cloud.
+5.  [**AWS Batch**](https://aws.amazon.com/batch/): AWS Batch is a service that allows you to run batch computing workloads on the AWS cloud. You can use AWS Batch to build your Singularity containers in the cloud.
 
-5.  [**GitLab's Container Registry**](https://about.gitlab.com/blog/2016/05/23/gitlab-container-registry/): GitLab's Container Registry is a built-in feature of GitLab that allows you to build and store your container images directly in your GitLab repository.
+6.  [**GitLab's Container Registry**](https://about.gitlab.com/blog/2016/05/23/gitlab-container-registry/): GitLab's Container Registry is a built-in feature of GitLab that allows you to build and store your container images directly in your GitLab repository.
 
 Each of these services has its own unique set of features and pricing plans. You should evaluate each one based on your specific needs and requirements.
 
-
-# Appendix{#appendix}
-
+# Appendix {#appendix}
 
 ## An example of a Singularity definition file
 
-```
-    Bootstrap: docker
-    From: ubuntu:20.04
-    IncludeCmd: yes
+        Bootstrap: docker
+        From: ubuntu:20.04
+        IncludeCmd: yes
 
 
-    %runscript
-        if [ $# -ne 1 ]; then
-            echo "Please provide the main script"
-            exit 1
-        fi
-        stata-mp -e do "$1"
-        if tail -1 "$log" | egrep "^r\([0-9]+\);"
-        then
-            exit 1
-        else
-            exit 0
-        fi
+        %runscript
+            if [ $# -ne 1 ]; then
+                echo "Please provide the main script"
+                exit 1
+            fi
+            stata-mp -e do "$1"
+            if tail -1 "$log" | egrep "^r\([0-9]+\);"
+            then
+                exit 1
+            else
+                exit 0
+            fi
 
 
-    %files
-      /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/libpng12-0_1.2.54-1ubuntu1.11ppa0eoan_amd64.deb
-      /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/stata17.tar.gz
-      /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/stata_container_just_Stata.do
+        %files
+          /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/libpng12-0_1.2.54-1ubuntu1.11ppa0eoan_amd64.deb
+          /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/stata17.tar.gz
+          /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/stata_container_just_Stata.do
 
 
-    %environment
+        %environment
 
-      R_VERSION=4.1.0
-      export R_VERSION
-      R_CONFIG_DIR=/etc/R/
-      export R_CONFIG_DIR
-      export LC_ALL=C
-      export PATH=$PATH
+          R_VERSION=4.1.0
+          export R_VERSION
+          R_CONFIG_DIR=/etc/R/
+          export R_CONFIG_DIR
+          export LC_ALL=C
+          export PATH=$PATH
 
-       TZ=Europe/Lisbon
-       export PATH="/opt/stata17:$PATH"
-
-
-    %labels
-
-      Author         :: Gustavo Iglesias and Miguel Portela -- BPLIM
-      Version        :: (just) Stata -- V1.0.1
-      Build_date     :: January 12, 2023
+           TZ=Europe/Lisbon
+           export PATH="/opt/stata17:$PATH"
 
 
-    %post
+        %labels
 
-    apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/London" apt-get -y install apt-transport-https apt-utils software-properties-common dirmngr curl wget xkb-data x11-apps bzip2 qt5-default mesa-utils libgl1-mesa-dev libgl1-mesa-glx libegl1-mesa libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 iproute2 swig build-essential libnss3 net-tools unixodbc-dev git vim krb5-user libncurses5 libxml2-dev libsasl2-dev libldap2-dev libssl-dev libnlopt-dev gnupg gnupg2 unixodbc gfortran nano cmake libblas3 libblas-dev liblapack-dev liblapack3 aptitude xorg-dev libreadline-dev libpcre3-dev liblzma-dev libbz2-dev libcurl4-openssl-dev libmagick++-dev libhdf5-dev hdf5-helpers gsl-bin libgsl-dev libgsl23 libgslcblas0 libgdal-dev libproj-dev libnss3 libzmq3-dev libgtk2.0-0
-
-
-    #  Stata
-
-        tar -xvzf /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/stata17.tar.gz --no-same-owner
-        mv stata17 /opt/
-        dpkg -i /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/libpng12-0_1.2.54-1ubuntu1.11ppa0eoan_amd64.deb
-        export PATH="/opt/stata17:$PATH"
-
-        # install ado files
-          mkdir /opt/stata17/ado/plus
-
-            stata-mp -b do /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/stata_container_just_Stata.do
-
-            chmod -R ugo=rx /opt/stata17/
+          Author         :: Gustavo Iglesias and Miguel Portela -- BPLIM
+          Version        :: (just) Stata -- V1.0.1
+          Build_date     :: January 12, 2023
 
 
-    # CLEAN temporary files
+        %post
 
-        apt-get update
-        apt-get autoremove
-        apt-get autoclean
-```
+        apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/London" apt-get -y install apt-transport-https apt-utils software-properties-common dirmngr curl wget xkb-data x11-apps bzip2 qt5-default mesa-utils libgl1-mesa-dev libgl1-mesa-glx libegl1-mesa libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 iproute2 swig build-essential libnss3 net-tools unixodbc-dev git vim krb5-user libncurses5 libxml2-dev libsasl2-dev libldap2-dev libssl-dev libnlopt-dev gnupg gnupg2 unixodbc gfortran nano cmake libblas3 libblas-dev liblapack-dev liblapack3 aptitude xorg-dev libreadline-dev libpcre3-dev liblzma-dev libbz2-dev libcurl4-openssl-dev libmagick++-dev libhdf5-dev hdf5-helpers gsl-bin libgsl-dev libgsl23 libgslcblas0 libgdal-dev libproj-dev libnss3 libzmq3-dev libgtk2.0-0
+
+
+        #  Stata
+
+            tar -xvzf /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/stata17.tar.gz --no-same-owner
+            mv stata17 /opt/
+            dpkg -i /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/libpng12-0_1.2.54-1ubuntu1.11ppa0eoan_amd64.deb
+            export PATH="/opt/stata17:$PATH"
+
+            # install ado files
+              mkdir /opt/stata17/ado/plus
+
+                stata-mp -b do /mnt/cephfs/home/exu0o9@bdp.pt/containers/_SOURCES/stata_container_just_Stata.do
+
+                chmod -R ugo=rx /opt/stata17/
+
+
+        # CLEAN temporary files
+
+            apt-get update
+            apt-get autoremove
+            apt-get autoclean
