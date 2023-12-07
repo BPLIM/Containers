@@ -51,7 +51,13 @@ curl -o stata17_NoLic.tar.gz https://we.tl/t-FiaMJvwWZx
 
     echo 'set python_exec "/usr/local/pyenv/versions/3.10.0/bin/python3", perm' > /usr/local/stata17/profile.do
 
+    echo 'EMPTY_LIC' > /usr/local/stata17/stata.lic
 
+	echo 'sysdir set PLUS "/usr/local/stata17/ado/plus"' >> /usr/local/stata17/profile.do
+	echo 'mata' >> /usr/local/stata17/profile.do
+	echo 'mata mlib index' >> /usr/local/stata17/profile.do
+	echo 'end' >> /usr/local/stata17/profile.do
+    
 # Install pip
 
     wget https://bootstrap.pypa.io/get-pip.py
