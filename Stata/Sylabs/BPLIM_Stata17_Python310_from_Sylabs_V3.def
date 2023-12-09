@@ -1,0 +1,43 @@
+Bootstrap: library
+From: reisportela/bplim/bplim_stata17_python310
+IncludeCmd: yes
+
+
+%environment
+  TZ=Europe/Lisbon
+  export DEBIAN_FRONTEND="noninteractive"
+  export PATH="/usr/local/pyenv/versions/3.10.0/bin/:/usr/local/stata:$PATH"
+
+
+%labels
+
+  Author         :: Built from Lars Vilhuber; adapted by Miguel Portela -- BPLIM
+  Version        :: https://cloud.sylabs.io/library/larsvilhuber/dataeditors/stata17
+  AEA Data Editor:: https://github.com/AEADataEditor/docker-stata
+  NOTE           :: singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_Stata17_Python310_Sylabs.sif
+  Build_date     :: August, 2023
+
+
+%post
+
+    export DEBIAN_FRONTEND="noninteractive"
+    export TZ="Europe/London"
+
+    apt -y update
+    apt -y upgrade
+
+apt -y install vim
+
+    # install Stata ado files
+	mkdir plus
+    
+    # Install .ado files
+	stata-mp -b do Stata_ados_BASE.do
+    
+    mv plus /usr/local/stata17/ado/
+
+chmod -R u=rwx /opt/stata17/
+chmod -R go=rx /opt/stata17/
+
+## HOW to RUN THE CONTAINER
+# singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_Stata17_Python310_Sylabs.sif

@@ -1,0 +1,77 @@
+Bootstrap: docker
+From: ubuntu:20.04
+IncludeCmd: yes
+
+%environment
+  TZ="Europe/London"
+  DEBIAN_FRONTEND="noninteractive"
+  export PATH="/usr/local/pyenv/versions/3.10.0/bin/:/usr/local/stata17:$PATH"
+
+
+%labels
+  Author         :: Miguel Portela -- BPLIM
+  Version        :: Stata 17 with Python 3.10 & Jupyter - V01
+  Build_date     :: September, 2023
+  reisportela/bplim/bplim_stata17_python310
+
+%post
+
+    apt-get -y update
+    apt-get -y upgrade
+
+apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/London" apt-get -y install git curl make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev vim
+
+mkdir /usr/local/pyenv
+
+export PYENV_ROOT="/usr/local/pyenv"
+
+git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT
+chown -R root:users /usr/local/pyenv
+
+echo 'export PYENV_ROOT="$PYENV_ROOT"' >> /etc/profile
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> /etc/profile
+
+cd /usr/local/pyenv
+
+/usr/local/pyenv/bin/pyenv install 3.10.0
+/usr/local/pyenv/bin/pyenv global 3.10.0
+
+update-alternatives --install /usr/bin/python3 python3 /usr/local/pyenv/versions/3.10.0/bin/python3.10 1
+
+
+    apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/London" apt-get -y install apt-transport-https apt-utils software-properties-common wget bzip2 zip pandoc texlive-latex-base xkb-data x11-apps libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 libncurses5 libgtk2.0-0 firefox
+
+
+# Install Stata from local .tar file
+curl -k -o stata17_NoLic.tar.gz http://www1.eeg.uminho.pt/economia/mangelo/_containers/stata17_NoLic.tar.gz
+
+    tar -xvzf stata17_NoLic.tar.gz --no-same-owner
+    mv stata17 /usr/local/
+
+chmod -R u=rwx /opt/stata17/
+chmod -R go=rx /opt/stata17/
+
+    export PATH="/usr/local/stata17:$PATH"
+
+    echo 'set python_exec "/usr/local/pyenv/versions/3.10.0/bin/python3", perm' > /usr/local/stata17/profile.do
+
+
+# Install pip
+
+    wget https://bootstrap.pypa.io/get-pip.py
+    python3 get-pip.py
+
+
+#  Jupyter
+
+	apt update && apt install -y libzmq3-dev libcurl4-openssl-dev libssl-dev
+	/usr/local/pyenv/versions/3.10.0/bin/pip3 install jupyterlab notebook
+
+
+# CLEAN temporary files
+
+    apt-get update
+    apt-get autoremove
+    apt-get autoclean
+
+# singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_Stata17_Pytho310_NoLic_V1.sif
