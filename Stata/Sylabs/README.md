@@ -12,7 +12,7 @@ Go to [https://cloud.sylabs.io/library/reisportela/bplim/bplim_stata17_python310
 
 3. The definition file that was used to build the container in Sylabs is `BPLIM_basecontainer_Stata_Python310_forSylabs_V1.def`
 
-## 2. Build your container
+## 2. Build your container using your local machine
 
 1. Use the following definition file as a template
 
@@ -23,3 +23,14 @@ Go to [https://cloud.sylabs.io/library/reisportela/bplim/bplim_stata17_python310
 3. When building the container the file `Stata_ados_BASE.do` is used to install the ado files you need
 
 4. In case you need additional Linux packages in your container they can be added in the section `%post` of the definition file. See further details at [https://github.com/BPLIM/Containers/tree/main/Stata](https://github.com/BPLIM/Containers/tree/main/Stata)
+
+
+## 3. Build your container using Sylabs
+
+1. Go to Sylabs, [https://cloud.sylabs.io/](https://cloud.sylabs.io/), Sign up and Sign in
+
+2. Go to Remote Builder
+
+3. Copy/paste the definition file into the text box
+
+4. Give a name to the container and click in Submit Build
