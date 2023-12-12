@@ -1,0 +1,53 @@
+Bootstrap: library
+From: reisportela/bplim/bplim_stata17_python310
+IncludeCmd: yes
+
+
+%files
+  CREDENTIALS.txt
+  Stata_ados_BASE.do
+  stata.lic
+
+
+%environment
+  TZ=Europe/Lisbon
+  export DEBIAN_FRONTEND="noninteractive"
+  export PATH="/usr/local/pyenv/versions/3.10.0/bin/:/usr/local/stata:$PATH"
+
+
+%labels
+
+  Author         :: BPLIM
+  Version        :: V04
+  Build_date     :: December, 2023
+  NOTE           :: singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_Stata17_Python310_Sylabs.sif
+
+
+%post
+
+    export DEBIAN_FRONTEND="noninteractive"
+    export TZ="Europe/London"
+
+#    apt -y update
+#    apt -y upgrade
+
+#apt -y install vim
+
+    # install Stata ado files
+	mkdir plus
+
+cp stata.lic /usr/local/stata17/
+   
+    # Install .ado files
+	stata-mp -b do Stata_ados_BASE.do
+    
+    mv plus /usr/local/stata17/ado/
+
+chmod -R u=rwx /usr/local/stata17/
+chmod -R go=rx /usr/local/stata17/
+
+
+## HOW to RUN THE CONTAINER
+
+# singularity build --fakeroot -B $(pwd)/stata.lic:/usr/local/stata17/stata.lic iBPLIM_Stata17_Python310_from_Sylabs_V4.sif BPLIM_Stata17_Python310_from_Sylabs_V4.def
+# singularity shell -B $(pwd)/stata.lic:/usr/local/stata17/stata.lic iBPLIM_Stata17_Python310_from_Sylabs_V4.sif
