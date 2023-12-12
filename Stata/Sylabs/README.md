@@ -1,6 +1,6 @@
 Here you will find the instructions to use the base container available on Sylabs. Additionally, we provide instructions on how you can build your own container from the one available on Sylabs.
 
-## Using the container available in Sylabs
+## 1. Using the container available in Sylabs
 
 1. Download the container
 
@@ -12,7 +12,7 @@ Go to [https://cloud.sylabs.io/library/reisportela/bplim/bplim_stata17_python310
 
 3. The definition file that was used to build the container in Sylabs is `BPLIM_basecontainer_Stata_Python310_forSylabs_V1.def`
 
-## Build your container
+## 2. Build your container
 
 1. Use the following definition file as a template
 
