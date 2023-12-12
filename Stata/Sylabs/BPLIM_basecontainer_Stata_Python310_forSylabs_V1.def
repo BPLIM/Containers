@@ -12,6 +12,9 @@ IncludeCmd: yes
   Author         :: BPLIM
   Version        :: Stata 17 with Python 3.10 & Jupyter - V01
   Build_date     :: December, 2023
+  NOTES          :: Container without Stata license made available on Sylabs
+                 :: Place your stata.lic file in the same folder as the container
+                 :: Running the container: singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_basecontainer_Stata_Python310_forSylabs_V1.sif
 
 
 %post
@@ -75,5 +78,3 @@ curl -k -o stata17_NoLic.tar.gz http://www1.eeg.uminho.pt/economia/mangelo/_cont
     apt-get update
     apt-get autoremove
     apt-get autoclean
-
-# singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_Stata17_Pytho310_NoLic_V1.sif
