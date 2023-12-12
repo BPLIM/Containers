@@ -9,9 +9,9 @@ IncludeCmd: yes
 
 
 %labels
-  Author         :: Miguel Portela -- BPLIM
+  Author         :: BPLIM
   Version        :: Stata 17 with Python 3.10 & Jupyter - V01
-  Build_date     :: August, 2023
+  Build_date     :: December, 2023
 
 
 %post
