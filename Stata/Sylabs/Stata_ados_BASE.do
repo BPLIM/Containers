@@ -39,7 +39,7 @@ local package = "egenmore estout"
 foreach pk of local package {
 local first = substr("`pk'",1,1)
 sleep 2000
-capture require `pk', install from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2023-10-25/fmwww.bc.edu/repec/bocode/`first'") adopath("plus")
+capture require `pk', install from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2023-10-25/fmwww.bc.edu/repec/bocode/`first'") adopath("plus")*/
 }
 
-require using requirements.txt, list adopath(plus) replace exact
+require using requirements.txt, list adopath(plus) replace exact
