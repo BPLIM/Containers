@@ -1,0 +1,27 @@
+* Created on 17 Dec 2023 by exu0o9 @ L023896 on Windows-64-bit
+* Edit this file to remove redundant lines
+* Then, include this line in your do-file:
+* require using requirements.txt, install
+
+    gtools == 1.8.4
+    missings == 1.1.1
+    estout == 3.30.0
+    xtabond2 == 3.7.0
+    unique == 1.2.4
+    sjlatex == 1.2.2
+    markstat == 2.7.0
+    whereis == 1.4.0
+    psmatch2 == 4.0.12
+    estout == 3.30.0
+    ftools == 2.49.0
+    parallel == 1.20.0
+    ivreg2 == 4.1.11
+    ivreghdfe == 1.1.2
+    ppmlhdfe == 2.2.0
+    flexpaneldid == 1.3.1
+    csdid == 1.72.0
+    drdid == 1.37.0
+    validarcae == 0.7.0
+    adoinstall == 0.1.0
+    outreg2 == 2.3.2
+    require == 1.3.1
