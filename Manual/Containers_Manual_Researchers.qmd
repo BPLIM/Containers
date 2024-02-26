@@ -42,7 +42,7 @@ This solution makes use of the `Terminal`, giving you more freedom to interact w
 
 1.  Open a Terminal in your project's work_area (e.g., `/bplimext/projects/PROJECT_ID/work_area`).
 
-2.  The container is located in your project's tools folder (`/bplimext/projects/PROJECT_ID/tools`).
+2.  The container is located in your project's tools folder (`/bplimext/projects/PROJECT_ID/tools/_container`).
 
 3.  Run the container using the following command:
 
