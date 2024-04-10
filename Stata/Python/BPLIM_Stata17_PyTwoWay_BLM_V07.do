@@ -20,35 +20,13 @@ import delimited "/mnt/cephfs/home/exu0o9@bdp.pt/.secrets/CREDENTIALS.txt", varn
     sysdir set PLUS "plus"
     ssc install require
     
-    //ssc install adoinstall
-* # 0. Install 'adoinstall'
-**require adoinstall, install from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-01-15/fmwww.bc.edu/repec/bocode/a") adopath("plus")
-
 // IF A FILE requirements.txt ALREADY EXISTS UNCOMMENT THE FOLLOWING LINE AND COMMENT FROM LINE 26
 **require using requirements.txt, install adopath("plus")
 
 *
-* # 1. Install 'gtools'
-require gtools, install from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-01-15/fmwww.bc.edu/repec/bocode/g") adopath("plus")
+* # 1. Additional packages
 
-
-* # 2. Install 'ftools' (remove program if it existed previously)
-require ftools, install from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-01-15/fmwww.bc.edu/repec/bocode/f") adopath("plus")
-
-
-* # 3. Install 'reghdfe' & 'ppmlhdfe'
-	require reghdfe, install from("https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/") adopath("plus")
-
-	adoinstall ppmlhdfe, install from("https://raw.githubusercontent.com/sergiocorreia/ppmlhdfe/master/src/") adopath("plus")
-
-
-* # 4. Install 'panelstat'
-	require panelstat,from("https://github.com/BPLIM/Tools/raw/master/ados/General/panelstat/") adopath("plus")
-
-
-* # 5. Additional packages
-
-local pk = "egenmore group2hdfe group3hdfe estout ivreg2 ranktest"
+local pk = "gtools ftools egenmore group2hdfe group3hdfe estout ivreg2 ranktest reghdfe"
 
 foreach pp of local pk {
 local first = substr("`pp'",1,1)
@@ -57,3 +35,8 @@ capture require `pp', install from("https://raw.githubusercontent.com/labordynam
 }
 
 
+* # 2. REQUIRE
+
+require using /usr/local/stata/requirements.txt, list adopath(plus) replace
+
+*/

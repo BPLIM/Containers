@@ -26,13 +26,18 @@ IncludeCmd: yes
     apt -y update
     apt -y upgrade
 
-apt -y install git curl make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+apt -y install git curl make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev wget
 
 mkdir /usr/local/pyenv
 
 export PYENV_ROOT="/usr/local/pyenv"
 
-git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT
+#git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT
+
+wget https://github.com/pyenv/pyenv/archive/refs/heads/master.zip
+unzip master.zip
+mv pyenv-master pyenv
+mv pyenv /usr/local/
 chown -R root:users /usr/local/pyenv
 
 echo 'export PYENV_ROOT="$PYENV_ROOT"' >> /etc/profile
