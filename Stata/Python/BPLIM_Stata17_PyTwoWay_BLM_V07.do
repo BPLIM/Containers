@@ -37,6 +37,6 @@ capture require `pp', install from("https://raw.githubusercontent.com/labordynam
 
 * # 2. REQUIRE
 
-require using /usr/local/stata/requirements.txt, list adopath(plus) replace
+require using plus/requirements.txt, list adopath(plus) replace
 
 */
