@@ -2,6 +2,9 @@ Bootstrap: library
 From: larsvilhuber/dataeditors/stata17:2022-01-17
 IncludeCmd: yes
 
+%files
+    /mnt/cephfs/home/exu0o9@bdp.pt/.secrets/CREDENTIALS.txt
+    stata.lic
 
 %environment
   TZ=Europe/Lisbon
@@ -15,7 +18,7 @@ IncludeCmd: yes
   Version        :: https://cloud.sylabs.io/library/larsvilhuber/dataeditors/stata17
   AEA Data Editor:: https://github.com/AEADataEditor/docker-stata
   NOTE           :: singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_Stata_from_AEA_DataEditor_PyTwoWay_V4.sif
-  Build_date     :: August, 2023
+  Build_date     :: April, 2024
 
 
 %post
@@ -78,8 +81,13 @@ apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/Lond
 
     # Install .ado files
 	mkdir plus
-	wget https://raw.githubusercontent.com/BPLIM/Containers/main/Stata/Python/BPLIM_Stata17_PyTwoWay_BLM_V07.do
+	wget https://raw.githubusercontent.com/BPLIM/Containers/main/Stata/EXTENSIONS/Python/BPLIM_Stata17_PyTwoWay_BLM_V07.do
+
+cat "stata.lic" > /usr/local/stata/stata.lic
+
 	stata-mp -b do BPLIM_Stata17_PyTwoWay_BLM_V07.do
+
+rm /usr/local/stata/stata.lic
     
     mv plus /usr/local/stata/ado/
     

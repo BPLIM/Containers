@@ -1,6 +1,8 @@
 // BPLIM - Packages to be installed inside a container
-// V05 - August, 2023
+// V07 - April, 2024
 
+// Comment here in case your firewall does not require a login and password
+*
 import delimited "/mnt/cephfs/home/exu0o9@bdp.pt/.secrets/CREDENTIALS.txt", varnames(1) clear
 	local USER = user[1]
 	local SECRET = secret[1]
@@ -13,6 +15,8 @@ import delimited "/mnt/cephfs/home/exu0o9@bdp.pt/.secrets/CREDENTIALS.txt", varn
       set httpproxyauth    on
       set httpproxyuser    "`USER'"
       set httpproxypw      "`SECRET'"
+*
+// END comment
 
 	set timeout1 10000
 	set timeout2 10000
@@ -30,13 +34,14 @@ local pk = "gtools ftools egenmore group2hdfe group3hdfe estout ivreg2 ranktest 
 
 foreach pp of local pk {
 local first = substr("`pp'",1,1)
+di _new(1) "`pp'"
 sleep 2000
-capture require `pp', install from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-01-15/fmwww.bc.edu/repec/bocode/`first'") adopath("plus")
+require `pp', install from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-01-15/fmwww.bc.edu/repec/bocode/`first'") adopath("plus")
 }
 
 
 * # 2. REQUIRE
 
-require using plus/requirements.txt, list adopath(plus) replace
+require using plus/requirements.txt, list adopath(plus) exact stata replace
 
 */
