@@ -23,6 +23,31 @@ IncludeCmd: yes
 
 %post
 
+    apt -y update
+    apt -y upgrade
+
+apt -y install wget
+
+# Stata
+
+    # Install .ado files
+	mkdir plus
+	wget https://raw.githubusercontent.com/BPLIM/Containers/main/Stata/EXTENSIONS/Python/BPLIM_Stata17_PyTwoWay_BLM_V07.do
+
+cat "stata.lic" > /usr/local/stata/stata.lic
+
+	stata-mp -b do BPLIM_Stata17_PyTwoWay_BLM_V07.do
+
+rm /usr/local/stata/stata.lic
+    
+    mv plus /usr/local/stata/ado/
+    
+    echo 'set python_exec "/usr/local/pyenv/versions/3.10.0/bin/python3", perm' > /usr/local/stata/profile.do
+    echo 'adopath ++ "/usr/local/stata/ado/plus"' >> /usr/local/stata/profile.do
+
+    chmod -R o=rx /usr/local/stata/
+
+
     export DEBIAN_FRONTEND="noninteractive"
     export TZ="Europe/London"
 
@@ -75,26 +100,6 @@ apt update && apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/Lond
 
 	apt update && apt install -y libzmq3-dev libcurl4-openssl-dev libssl-dev
 	/usr/local/pyenv/versions/3.10.0/bin/pip3 install jupyterlab notebook
-
-
-# Stata
-
-    # Install .ado files
-	mkdir plus
-	wget https://raw.githubusercontent.com/BPLIM/Containers/main/Stata/EXTENSIONS/Python/BPLIM_Stata17_PyTwoWay_BLM_V07.do
-
-cat "stata.lic" > /usr/local/stata/stata.lic
-
-	stata-mp -b do BPLIM_Stata17_PyTwoWay_BLM_V07.do
-
-rm /usr/local/stata/stata.lic
-    
-    mv plus /usr/local/stata/ado/
-    
-    echo 'set python_exec "/usr/local/pyenv/versions/3.10.0/bin/python3", perm' > /usr/local/stata/profile.do
-    echo 'adopath ++ "/opt/stata17/ado/plus"' >> /usr/local/stata/profile.do
-
-    chmod -R o=rx /usr/local/stata/
 
 
 # CLEAN temporary files
