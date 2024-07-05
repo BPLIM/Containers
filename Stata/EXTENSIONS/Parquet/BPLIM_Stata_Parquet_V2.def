@@ -19,6 +19,7 @@ From: ubuntu:20.04
     Author "Miguel Portela -- BPLIM"
     Version "Stata & Parquet-- V1.0.1"
     Build_date "May 26, 2023"
+    Aknowledgment  :: Stata Parquet is authored by Mauricio Caceres Bravo available here "https://github.com/mcaceresb/stata-parquet"
 
 %post
     apt-get -y update
@@ -101,7 +102,8 @@ ls /opt/stata17/ado/plus/
 
 ###############################################
 
-    echo "export PATH=/opt/stata17:$PATH" >> $SINGULARITY_ENVIRONMENT
+    echo "export PATH=/opt/stata17:$PATH" >> $SINGULARITY_ENVIRONMENT
+
 
 
     # CLEAN temporary files
