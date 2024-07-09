@@ -1,0 +1,26 @@
+Bootstrap: library
+From: reisportela/bplim/ubuntu2004:2024_05_09
+IncludeCmd: yes
+
+%files
+    requirements.txt
+
+%environment
+  export TZ="Europe/Lisbon"
+  export DEBIAN_FRONTEND="noninteractive"
+
+%labels
+  Author         :: BPLIM's Team
+  Build_date     :: April 27, 2024
+  Dependencies   :: Bootstrap: reisportela/bplim/ubuntu2004:2024_05_09
+                 :: requirements.txt
+                 :: These file should be in the folder where you build the container
+  Build          :: time singularity build --fakeroot --force iBPLIM_Python.sif BPLIM_Python_V01.def
+                 :: To run the container type in the Terminal:
+                 :: singularity shell iBPLIM_Python.sif
+                 
+%post
+
+# Install Python Packages
+
+	/usr/local/pyenv/versions/3.10.0/bin/pip3 install -r requirements.txt
