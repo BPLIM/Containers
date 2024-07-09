@@ -1,0 +1,19 @@
+* Edit this file to remove redundant lines
+* Then, include this line in your do-file:
+* require using Stata_requirements.txt, install
+
+    bpencode 	== 0.1		, from("https://github.com/BPLIM/Tools/raw/master/ados/General/bpencode")
+    coefplot 	== 1.8.6	, from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-05-08/fmwww.bc.edu/repec/bocode/c")
+    egenmore				, from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-05-08/fmwww.bc.edu/repec/bocode/e")
+    estout 		== 3.31		, from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-05-08/fmwww.bc.edu/repec/bocode/e")
+    filelist 	== 2.0.7	, from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-05-08/fmwww.bc.edu/repec/bocode/f")	
+    ftools 		== 2.49.1	, from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-05-08/fmwww.bc.edu/repec/bocode/f")
+    group2hdfe 	== 1.01		, from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-05-08/fmwww.bc.edu/repec/bocode/g")
+    gtools 		== 1.10.1	, from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-05-08/fmwww.bc.edu/repec/bocode/g")
+    ivreg2 		== 4.1.11	, from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-05-08/fmwww.bc.edu/repec/bocode/i")
+    mdata 		== 0.3		, from("https://github.com/BPLIM/Tools/raw/master/ados/General/mdata/")
+    outreg2 	== 2.3.2	, from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-05-08/fmwww.bc.edu/repec/bocode/o")
+    panelstat 	== 3.5		, from("https://github.com/BPLIM/Tools/raw/master/ados/General/panelstat/")
+    ranktest 	== 2.0.04	, from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-05-08/fmwww.bc.edu/repec/bocode/r")
+    reghdfe 	== 6.12.5	, from("https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/")
+    winsor 		== 1.3.0	, from("https://raw.githubusercontent.com/labordynamicsinstitute/ssc-mirror/2024-05-08/fmwww.bc.edu/repec/bocode/w")

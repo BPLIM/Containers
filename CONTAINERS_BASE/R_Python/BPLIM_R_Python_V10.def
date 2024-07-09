@@ -1,0 +1,96 @@
+Bootstrap: library
+From: reisportela/bplim/ubuntu2004:2024_05_09
+IncludeCmd: yes
+
+%files
+R_requirements_V5.csv
+requirements.txt
+
+
+%environment
+  export TZ="Europe/Lisbon"
+  export DEBIAN_FRONTEND="noninteractive"
+
+  export LC_ALL=en_US.UTF-8
+  export LANG=en_US.UTF-8
+
+  export R_LIBS=/opt/Rbox/renv/library/linux-ubuntu-focal/R-4.4/x86_64-pc-linux-gnu/
+
+%labels
+  Author         :: BPLIM's Team
+  Build_date     :: July 9, 2024
+  Dependencies   :: Bootstrap: reisportela/bplim/ubuntu2004:2024_05_09
+                 :: requirements.txt
+                 :: R_requirements.csv
+                 :: These file should be in the folder where you build the container
+  Build          :: time singularity build --fakeroot --force iBPLIM_R_Python.sif BPLIM_R_Python_V05.def
+                 :: To run the container type in the Terminal:
+                 :: singularity shell iBPLIM_R_Python.sif
+            
+%post
+  apt-get update && ACCEPT_EULA=Y && apt-get install -y locales locales-all apt-transport-https ca-certificates dbus-x11 dirmngr gnupg libcairo2-dev libcurl4-openssl-dev libfontconfig1-dev libfreetype6-dev libpango1.0-dev libpangocairo-1.0-0 libpq-dev libssl-dev libssl-dev libxml2-dev libv8-dev libx11-dev libxext-dev libxml2-dev libxrandr2 libxrender1 libxtst6 nvidia-cuda-dev nvidia-cuda-toolkit software-properties-common x11-utils
+
+  locale-gen "en_US.UTF-8"
+  dpkg-reconfigure locales
+
+# Python adaptation
+  ls -l /usr/bin/python3
+  rm /usr/bin/python3
+  ln -s /usr/bin/python3.8 /usr/bin/python3
+
+    wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+    add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/"
+    add-apt-repository ppa:c2d4u.team/c2d4u4.0+
+
+  rm /usr/bin/python3
+  ln -s /etc/alternatives/python3 /usr/bin/python3
+
+# Install R version 4.4.0
+  wget https://cran.r-project.org/src/base/R-4/R-4.4.0.tar.gz
+  tar -xzvf R-4.4.0.tar.gz
+  cd R-4.4.0
+
+  # Configure the installation
+    ./configure --enable-R-shlib --with-blas --with-lapack
+
+  # Build and install
+    make
+    make install
+
+  # Clean temporary files
+    make clean
+    cd ..
+    rm -rf R-4.4.0
+    rm R-4.4.0.tar.gz
+
+
+# Install packages and activate 'renv'
+  mkdir Rbox
+  cd Rbox
+
+  Rscript -e 'options(repos = list(CRAN = "https://cloud.r-project.org")); install.packages("renv"); renv::init(); install.packages("remotes"); packages <- read.csv("../R_requirements_V5.csv"); apply(packages, 1, function(x) remotes::install_version(package = x["Package"], version = x["Version"], dependencies = TRUE, upgrade = "never"))'
+
+  Rscript -e 'renv::snapshot()'
+  Rscript -e '.libPaths("/usr/local/lib/R/library")'
+
+  cd ..
+  chmod -R 755 Rbox
+
+  mv Rbox /opt/
+
+
+#  RStudio
+  wget https://download1.rstudio.org/electron/focal/amd64/rstudio-2024.04.0-735-amd64.deb
+  apt install -y ./rstudio-2024.04.0-735-amd64.deb
+  rm rstudio-2024.04.0-735-amd64.deb
+
+
+# Install Python Packages
+
+	/usr/local/pyenv/versions/3.10.0/bin/pip3 install -r requirements.txt
+
+
+# CLEAN temporary files
+
+    apt autoremove --yes
+    apt autoclean --yes

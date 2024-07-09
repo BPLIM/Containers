@@ -1,0 +1,50 @@
+Bootstrap: library
+From: reisportela/bplim/stata18:2024_04_27
+IncludeCmd: yes
+
+%files
+    /mnt/cephfs/home/exu0o9@bdp.pt/.secrets/CREDENTIALS.txt
+    stata.lic
+    BPLIM_Stata18_V01.do
+    Stata_requirements.txt
+    requirements.txt
+
+%environment
+  export TZ="Europe/Lisbon"
+  export DEBIAN_FRONTEND="noninteractive"
+
+%labels
+  Author         :: BPLIM's Team
+  Build_date     :: July 9, 2024
+  Dependencies   :: Bootstrap: reisportela/bplim/stata18:2024_04_27
+                 :: CREDENTIALS.txt; stata.lic; BPLIM_Stata18_V01.do; Stata_requirements.txt; requirements.txt
+  Notes          :: You need a Stata 18 license to run Stata in this container. To run the container type
+                 :: singularity shell -B $(pwd)/stata.lic:/usr/local/stata/stata.lic iBPLIM_Stata18.sif
+
+
+%post
+
+#  Stata
+cp stata.lic /usr/local/stata/
+
+    # Install .ado files; make sure the following folder matches one in the .do file
+	mkdir /usr/local/stata/ado/plus
+        chmod -R 777 /usr/local/stata/ado/plus
+
+	stata-mp do BPLIM_Stata18_V01.do
+
+    if [ $? -ne 0 ]; then
+        echo "Installation failed"
+        exit 1
+    fi
+
+
+# Install Python Packages
+
+	/usr/local/pyenv/versions/3.10.0/bin/pip3 install -r requirements.txt
+
+
+# CLEAN temporary files
+
+    apt autoremove --yes
+    apt autoclean --yes
